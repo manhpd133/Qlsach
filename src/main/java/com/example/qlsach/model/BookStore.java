@@ -3,15 +3,15 @@ package com.example.qlsach.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "bookstore")
+@Table(name = "BookStore")
 public class BookStore {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idbookstore;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idBookStore;
 
     @Column(name = "namebookstore")
-    private String namebookstore;
+    private String nameBookStore;
 
     @Column(name = "address")
     private String address;
@@ -19,26 +19,25 @@ public class BookStore {
     public BookStore() {
     }
 
-    public BookStore(String namebookstore, String address) {
-
-        this.namebookstore = namebookstore;
+    public BookStore(String nameBookStore, String address) {
+        this.nameBookStore = nameBookStore;
         this.address = address;
     }
 
-    public long getIdbookstore() {
-        return idbookstore;
+    public long getIdBookStore() {
+        return idBookStore;
     }
 
-    public void setIdbookstore(int idbookstore) {
-        this.idbookstore = idbookstore;
+    public void setIdBookStore(int idbookstore) {
+        this.idBookStore = idbookstore;
     }
 
-    public String getNamebookstore() {
-        return namebookstore;
+    public String getNameBookStore() {
+        return nameBookStore;
     }
 
-    public void setNamebookstore(String namebookstore) {
-        this.namebookstore = namebookstore;
+    public void setNameBookStore(String namebookstore) {
+        this.nameBookStore = namebookstore;
     }
 
     public String getAddress() {
@@ -52,8 +51,8 @@ public class BookStore {
     @Override
     public String toString() {
         return "BookStore{" +
-                "idbookstore=" + idbookstore +
-                ", namebookstore='" + namebookstore + '\'' +
+                "idbookstore=" + idBookStore +
+                ", namebookstore='" + nameBookStore + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

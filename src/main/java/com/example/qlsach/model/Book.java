@@ -7,61 +7,61 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idBook;
 
     @Column(name = "namebook")
-    private String namebook;
+    private String nameBook;
 
     @Column(name = "bookshelves")
-    private Float bookshelves;
+    private Float bookShelves;
 
     @Column(name = "author")
     private String author;
 
     @Column(name = "idbookstore")
-    private int idbookstore;
+    private int idBookStore;
 
     @Column(name = "releasedate")
-    private int releasedate;
+    private int releaseDate;
 
     @Column(name = "saledate")
-    private int saledate;
+    private int saleDate;
 
     public Book() {
     }
 
-    public Book(String namebook, Float bookshelves, String author, int idbookstore, int releasedate, int saledate) {
-        this.namebook = namebook;
-        this.bookshelves = bookshelves;
+    public Book(String namebook, Float bookShelves, String author, int idBookStore, int releasedate, int saledate) {
+        this.nameBook = namebook;
+        this.bookShelves = bookShelves;
         this.author = author;
-        this.idbookstore = idbookstore;
-        this.releasedate = releasedate;
-        this.saledate = saledate;
+        this.idBookStore = idBookStore;
+        this.releaseDate = releasedate;
+        this.saleDate = saledate;
     }
 
-    public long getId() {
-        return id;
+    public long getIdBook() {
+        return idBook;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdBook(int idBook) {
+        this.idBook = idBook;
     }
 
-    public String getNamebook() {
-        return namebook;
+    public String getNameBook() {
+        return nameBook;
     }
 
-    public void setNamebook(String namebook) {
-        this.namebook = namebook;
+    public void setNameBook(String nameBook) {
+        this.nameBook = nameBook;
     }
 
-    public Float getBookshelves() {
-        return bookshelves;
+    public Float getBookShelves() {
+        return bookShelves;
     }
 
-    public void setBookshelves(Float bookshelves) {
-        this.bookshelves = bookshelves;
+    public void setBookShelves(Float bookShelves) {
+        this.bookShelves = bookShelves;
     }
 
     public String getAuthor() {
@@ -72,40 +72,40 @@ public class Book {
         this.author = author;
     }
 
-    public int getIdbookstore() {
-        return idbookstore;
+    public int getIdBookStore() {
+        return idBookStore;
     }
 
-    public void setIdbookstore(int idbookstore) {
-        this.idbookstore = idbookstore;
+    public void setIdBookStore(int idbookstore) {
+        this.idBookStore = idbookstore;
     }
 
-    public int getReleasedate() {
-        return releasedate;
+    public int getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setReleasedate(int releasedate) {
-        this.releasedate = releasedate;
+    public void setReleaseDate(int releasedate) {
+        this.releaseDate = releasedate;
     }
 
-    public int getSaledate() {
-        return saledate;
+    public int getSaleDate() {
+        return saleDate;
     }
 
-    public void setSaledate(int saledate) {
-        this.saledate = saledate;
+    public void setSaleDate(int saledate) {
+        this.saleDate = saledate;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", namebook='" + namebook + '\'' +
-                ", bookshelves=" + bookshelves +
+                "id=" + idBook +
+                ", namebook='" + nameBook + '\'' +
+                ", bookshelves=" + bookShelves +
                 ", author='" + author + '\'' +
-                ", idbookstore=" + idbookstore +
-                ", releasedate=" + releasedate +
-                ", saledate=" + saledate +
+                ", idbookstore=" + idBookStore +
+                ", releasedate=" + releaseDate +
+                ", saledate=" + saleDate +
                 '}';
     }
 }

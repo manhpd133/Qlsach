@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BookStoreReponsitory  extends JpaRepository<BookStore, Long> {
-    List<BookStore> findByNamebookstoreContaining(String namebookstore);
+    List<BookStore> findByNameBookStoreContaining(String namebookstore);
 }
 
