@@ -1,7 +1,7 @@
 package com.example.qlsach.controller;
 
 import com.example.qlsach.model.Book;
-import com.example.qlsach.reponsitory.BookReponsitory;
+import com.example.qlsach.reponsitory.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,53 +13,53 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/book")
 public class BookController {
 
     @Autowired
-    BookReponsitory bookReponsitory;
+    private BookRepository bookRepository;
 
-    @GetMapping("/book")
+    @GetMapping()
     public ResponseEntity<List<Book>> getAllBooks(@RequestParam(required = false) String namebook) {
         try {
             List<Book> books = new ArrayList<>();
             if (namebook == null) {
-                bookReponsitory.findAll().forEach(books::add);
+                bookRepository.findAll().forEach(books::add);
             } else
-                bookReponsitory.findByNameBookContaining(namebook).forEach(books::add);
+                bookRepository.findByNameBook(namebook).forEach(books::add);
 
             if (books.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
-    @GetMapping("/book/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Book> getBookByID(@PathVariable("id") long id) {
-        Optional<Book> bookData = bookReponsitory.findById(id);
+        Optional<Book> bookData = bookRepository.findById(id);
         if (bookData.isPresent()) {
             return new ResponseEntity<>(bookData.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/book")
+    @PostMapping()
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         try {
-            Book _book = bookReponsitory.save(new Book( book.getNameBook(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
-            return new ResponseEntity<>(_book, HttpStatus.CREATED);
+            Book bookAdd = bookRepository.save(new Book( book.getNameBook(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
+            return new ResponseEntity<>(bookAdd, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/book/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable("id") long id, @RequestBody Book book) {
-        Optional<Book> bookData = bookReponsitory.findById(id);
+        Optional<Book> bookData = bookRepository.findById(id);
         if (bookData.isPresent()) {
             Book bookEdit = bookData.get();
             bookEdit.setNameBook(book.getNameBook());
@@ -68,26 +68,26 @@ public class BookController {
             bookEdit.setIdBookStore(book.getIdBookStore());
             bookEdit.setReleaseDate(book.getReleaseDate());
             bookEdit.setSaleDate(bookEdit.getSaleDate());
-            return new ResponseEntity<>(bookReponsitory.save(bookEdit), HttpStatus.OK);
+            return new ResponseEntity<>(bookRepository.save(bookEdit), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Book> deleteBook (@PathVariable("id") long id) {
         try {
-            bookReponsitory.deleteById(id);
+            bookRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/book")
+    @DeleteMapping()
     public ResponseEntity<HttpStatus> deleteAllBooks() {
         try {
-            bookReponsitory.deleteAll();
+            bookRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -3,14 +3,15 @@ package com.example.qlsach.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BookStore")
+@Table(name = "book_store")
 public class BookStore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_bookstore")
     private long idBookStore;
 
-    @Column(name = "namebookstore")
+    @Column(name = "name_bookstore")
     private String nameBookStore;
 
     @Column(name = "address")
@@ -51,8 +52,8 @@ public class BookStore {
     @Override
     public String toString() {
         return "BookStore{" +
-                "idbookstore=" + idBookStore +
-                ", namebookstore='" + nameBookStore + '\'' +
+                "idBookStore=" + idBookStore +
+                ", nameBookStore='" + nameBookStore + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

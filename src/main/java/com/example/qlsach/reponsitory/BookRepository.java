@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookReponsitory extends JpaRepository<Book, Long> {
-    List<Book> findByNameBookContaining(String namebook);
+public interface BookRepository extends JpaRepository<Book, Long> {
+    List<Book> findByNameBook(String nameBook);
 }
+
