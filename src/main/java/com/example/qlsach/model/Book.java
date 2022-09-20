@@ -3,14 +3,14 @@ package com.example.qlsach.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "Book") // Tên table viết thường
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idBook;
+    private long idBook;        // Thêm @Column sửa tên cột trong DB
 
-    @Column(name = "namebook")
+    @Column(name = "namebook")  // Tên column nên đặt là name_book
     private String nameBook;
 
     @Column(name = "bookshelves")
@@ -31,7 +31,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(String namebook, Float bookShelves, String author, int idBookStore, int releasedate, int saledate) {
+    public Book(String namebook, Float bookShelves, String author, int idBookStore, int releasedate, int saledate) { // Tên biến có vấn đề
         this.nameBook = namebook;
         this.bookShelves = bookShelves;
         this.author = author;

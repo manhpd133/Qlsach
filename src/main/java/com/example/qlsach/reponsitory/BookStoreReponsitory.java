@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookStoreReponsitory  extends JpaRepository<BookStore, Long> {
-    List<BookStore> findByNameBookStoreContaining(String namebookstore);
+public interface BookStoreReponsitory  extends JpaRepository<BookStore, Long> { // Lỗi chính tả
+    List<BookStore> findByNameBookStoreContaining(String namebookstore); // Tên biến có vấn đề
 }
 

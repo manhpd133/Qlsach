@@ -20,13 +20,13 @@ public class BookStoreController {
     @Autowired
     BookStoreReponsitory bookStoreReponsitory;
 
-    @GetMapping ("/bookstore")
+    @GetMapping ("/bookstore") // Tất cả đều có chung path là bookstore tại sao không gắn bookstore vào RequestMapping? Sửa bookstore thành book_store
     public ResponseEntity<List<BookStore>> getAllBookStores(@RequestParam (required = false) String namebookstore) {
         try {
             List<BookStore> bookStores = new ArrayList<>();
             if (namebookstore == null) {
                 bookStoreReponsitory.findAll().forEach(bookStores::add);
-            }
+            } // Vấn đề khoảng trắng và cách dòng bị tương tự như controler phía trên
             else {
                 bookStoreReponsitory.findByNameBookStoreContaining(namebookstore).forEach(bookStores::add);
             }

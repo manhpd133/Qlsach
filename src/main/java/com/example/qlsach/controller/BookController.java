@@ -13,11 +13,11 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") // Tại sao không để /book vào đây luôn?
 public class BookController {
 
     @Autowired
-    BookReponsitory bookReponsitory;
+    BookReponsitory bookReponsitory;    // Nên sửa access modifier từ default -> private
 
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getAllBooks(@RequestParam(required = false) String namebook) {
@@ -30,20 +30,20 @@ public class BookController {
 
             if (books.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            }   // Sau 1 block code nên có 1 dòng trắng
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
+    // Thừa dòng trống không cần thiết
     @GetMapping("/book/{id}")
     public ResponseEntity<Book> getBookByID(@PathVariable("id") long id) {
         Optional<Book> bookData = bookReponsitory.findById(id);
         if (bookData.isPresent()) {
             return new ResponseEntity<>(bookData.get(), HttpStatus.OK);
-        }
+        } // Sau 1 block code nên có 1 dòng trắng
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

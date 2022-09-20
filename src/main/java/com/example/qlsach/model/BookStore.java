@@ -3,9 +3,9 @@ package com.example.qlsach.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BookStore")
+@Table(name = "BookStore") // tên table nên đặt là book_store
 public class BookStore {
-
+    // Lỗi tương tự như Class Book
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idBookStore;
