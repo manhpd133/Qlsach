@@ -18,8 +18,8 @@ public class BookStoreController {
     private BookStoreServices bookStoreServices;
 
     @GetMapping ()
-    public ResponseEntity<List<BookStore>> getAllBookStores(@RequestParam (required = false) String nameBookStore) {
-        return bookStoreServices.getAllBookStore(nameBookStore);
+    public ResponseEntity<List<BookStore>> getAllBookStores(@RequestParam (required = false, value = "bookStore_name") String bookStoreName) {
+        return bookStoreServices.getAllBookStore(bookStoreName);
     }
 
     @GetMapping("/{id}")

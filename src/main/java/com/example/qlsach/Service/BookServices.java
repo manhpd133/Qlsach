@@ -39,12 +39,13 @@ public class BookServices {
         if (bookData.isPresent()) {
             return new ResponseEntity<>(bookData.get(), HttpStatus.OK);
         }
+
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Book> createBook(Book book) {
         try {
-            Book bookAdd = bookRepository.save(new Book( book.getNameBook(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
+            Book bookAdd = bookRepository.save(new Book( book.getBookName(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
             return new ResponseEntity<>(bookAdd, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,7 +56,7 @@ public class BookServices {
         Optional<Book> bookData = bookRepository.findById(id);
         if (bookData.isPresent()) {
             Book bookEdit = bookData.get();
-            bookEdit.setNameBook(book.getNameBook());
+            bookEdit.setBookName(book.getBookName());
             bookEdit.setBookShelves(book.getBookShelves());
             bookEdit.setAuthor(book.getAuthor());
             bookEdit.setIdBookStore(book.getIdBookStore());

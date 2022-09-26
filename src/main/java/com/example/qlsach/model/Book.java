@@ -1,18 +1,20 @@
 package com.example.qlsach.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "book") // Tên table viết thường
+@Table(name = "book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_book")
-    private long idBook;        // Thêm @Column sửa tên cột trong DB
+    @JsonProperty("id_book")
+    private long idBook;
 
-    @Column(name = "name_book")  // Tên column nên đặt là name_book
-    private String nameBook;
+    @Column(name = "name_book")
+    private String bookName;
 
     @Column(name = "bookshelves")
     private Float bookShelves;
@@ -32,8 +34,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(String nameBook, Float bookShelves, String author, int idBookStore, int releaseDate, int saleDate) { // Tên biến có vấn đề
-        this.nameBook = nameBook;
+    public Book(String bookName, Float bookShelves, String author, int idBookStore, int releaseDate, int saleDate) { // Tên biến có vấn đề
+        this.bookName = bookName;
         this.bookShelves = bookShelves;
         this.author = author;
         this.idBookStore = idBookStore;
@@ -49,12 +51,12 @@ public class Book {
         this.idBook = idBook;
     }
 
-    public String getNameBook() {
-        return nameBook;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
+    public void setBookName(String nameBook) {
+        this.bookName = nameBook;
     }
 
     public Float getBookShelves() {
@@ -101,7 +103,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + idBook +
-                ", nameBook='" + nameBook + '\'' +
+                ", nameBook='" + bookName + '\'' +
                 ", bookShelves=" + bookShelves +
                 ", author='" + author + '\'' +
                 ", idBookStore=" + idBookStore +

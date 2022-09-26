@@ -17,13 +17,13 @@ public class BookStoreServices {
     @Autowired
     private BookStoreRepository bookStoreRepository;
 
-    public ResponseEntity<List<BookStore>> getAllBookStore(String nameBookStore) {
+    public ResponseEntity<List<BookStore>> getAllBookStore(String bookNameStore) {
         try {
             List<BookStore> bookStores = new ArrayList<>();
-            if (nameBookStore == null) {
+            if (bookNameStore == null) {
                 bookStoreRepository.findAll().forEach(bookStores::add);
             } else {
-                bookStoreRepository.findByNameBookStore(nameBookStore).forEach(bookStores::add);
+                bookStoreRepository.findByNameBookStore(bookNameStore).forEach(bookStores::add);
             }
             if (bookStores.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,7 +45,7 @@ public class BookStoreServices {
 
     public ResponseEntity<BookStore> createBookStore (BookStore bookStore) {
         try {
-            BookStore bookStoreAdd = bookStoreRepository.save(new BookStore(bookStore.getNameBookStore(), bookStore.getAddress()));
+            BookStore bookStoreAdd = bookStoreRepository.save(new BookStore(bookStore.getBookNameStore(), bookStore.getAddress()));
             return new ResponseEntity<>(bookStoreAdd, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,7 +56,7 @@ public class BookStoreServices {
         Optional<BookStore> bookStoreData = bookStoreRepository.findById(id);
         if (bookStoreData.isPresent()) {
             BookStore bookStoreEdit = bookStoreData.get();
-            bookStoreEdit.setNameBookStore(bookStore.getNameBookStore());
+            bookStoreEdit.setBookNameStore(bookStore.getBookNameStore());
             bookStoreEdit.setAddress(bookStore.getAddress());
             return new ResponseEntity<>(bookStoreRepository.save(bookStoreEdit), HttpStatus.OK);
         } else {
