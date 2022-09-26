@@ -3,15 +3,15 @@ package com.example.qlsach.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "book")
+@Table(name = "book") // Tên table viết thường
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_book")
-    private long idBook;
+    private long idBook;        // Thêm @Column sửa tên cột trong DB
 
-    @Column(name = "name_book")
+    @Column(name = "name_book")  // Tên column nên đặt là name_book
     private String nameBook;
 
     @Column(name = "bookshelves")
@@ -32,7 +32,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(String nameBook, Float bookShelves, String author, int idBookStore, int releaseDate, int saleDate) {
+    public Book(String nameBook, Float bookShelves, String author, int idBookStore, int releaseDate, int saleDate) { // Tên biến có vấn đề
         this.nameBook = nameBook;
         this.bookShelves = bookShelves;
         this.author = author;
