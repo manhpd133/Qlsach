@@ -1,17 +1,19 @@
 package com.example.qlsach.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BookStore")
+@Table(name = "book_store")
 public class BookStore {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id_bookStore")
     private long idBookStore;
 
-    @Column(name = "namebookstore")
-    private String nameBookStore;
+    @Column(name = "name_bookstore")
+    private String bookNameStore;
 
     @Column(name = "address")
     private String address;
@@ -19,8 +21,8 @@ public class BookStore {
     public BookStore() {
     }
 
-    public BookStore(String nameBookStore, String address) {
-        this.nameBookStore = nameBookStore;
+    public BookStore(String bookNameStore, String address) {
+        this.bookNameStore = bookNameStore;
         this.address = address;
     }
 
@@ -32,12 +34,12 @@ public class BookStore {
         this.idBookStore = idbookstore;
     }
 
-    public String getNameBookStore() {
-        return nameBookStore;
+    public String getBookNameStore() {
+        return bookNameStore;
     }
 
-    public void setNameBookStore(String namebookstore) {
-        this.nameBookStore = namebookstore;
+    public void setBookNameStore(String namebookstore) {
+        this.bookNameStore = namebookstore;
     }
 
     public String getAddress() {
@@ -51,8 +53,8 @@ public class BookStore {
     @Override
     public String toString() {
         return "BookStore{" +
-                "idbookstore=" + idBookStore +
-                ", namebookstore='" + nameBookStore + '\'' +
+                "idBookStore=" + idBookStore +
+                ", nameBookStore='" + bookNameStore + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

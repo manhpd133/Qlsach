@@ -1,17 +1,20 @@
 package com.example.qlsach.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id_book")
     private long idBook;
 
-    @Column(name = "namebook")
-    private String nameBook;
+    @Column(name = "name_book")
+    private String bookName;
 
     @Column(name = "bookshelves")
     private Float bookShelves;
@@ -19,25 +22,25 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "idbookstore")
+    @Column(name = "id_bookstore")
     private int idBookStore;
 
-    @Column(name = "releasedate")
+    @Column(name = "release_date")
     private int releaseDate;
 
-    @Column(name = "saledate")
+    @Column(name = "sale_date")
     private int saleDate;
 
     public Book() {
     }
 
-    public Book(String namebook, Float bookShelves, String author, int idBookStore, int releasedate, int saledate) {
-        this.nameBook = namebook;
+    public Book(String bookName, Float bookShelves, String author, int idBookStore, int releaseDate, int saleDate) { // Tên biến có vấn đề
+        this.bookName = bookName;
         this.bookShelves = bookShelves;
         this.author = author;
         this.idBookStore = idBookStore;
-        this.releaseDate = releasedate;
-        this.saleDate = saledate;
+        this.releaseDate = releaseDate;
+        this.saleDate = saleDate;
     }
 
     public long getIdBook() {
@@ -48,12 +51,12 @@ public class Book {
         this.idBook = idBook;
     }
 
-    public String getNameBook() {
-        return nameBook;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
+    public void setBookName(String nameBook) {
+        this.bookName = nameBook;
     }
 
     public Float getBookShelves() {
@@ -76,36 +79,36 @@ public class Book {
         return idBookStore;
     }
 
-    public void setIdBookStore(int idbookstore) {
-        this.idBookStore = idbookstore;
+    public void setIdBookStore(int idBookStore) {
+        this.idBookStore = idBookStore;
     }
 
     public int getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(int releasedate) {
-        this.releaseDate = releasedate;
+    public void setReleaseDate(int releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public int getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(int saledate) {
-        this.saleDate = saledate;
+    public void setSaleDate(int saleDate) {
+        this.saleDate = saleDate;
     }
 
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + idBook +
-                ", namebook='" + nameBook + '\'' +
-                ", bookshelves=" + bookShelves +
+                ", nameBook='" + bookName + '\'' +
+                ", bookShelves=" + bookShelves +
                 ", author='" + author + '\'' +
-                ", idbookstore=" + idBookStore +
-                ", releasedate=" + releaseDate +
-                ", saledate=" + saleDate +
+                ", idBookStore=" + idBookStore +
+                ", releaseDate=" + releaseDate +
+                ", saleDate=" + saleDate +
                 '}';
     }
 }
