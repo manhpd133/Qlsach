@@ -1,21 +1,34 @@
-package com.example.qlsach.Service;
+package com.example.qlsach.service;
 
+import com.example.qlsach.googleapi.SheetsServiceUtil;
 import com.example.qlsach.model.Book;
 import com.example.qlsach.reponsitory.BookRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class BookServices {
 
     @Autowired
     private BookRepository bookRepository;
+
+//    @Autowired
+//    private SheetsServiceUtil sheetsServiceUtil;
+//
+//    public void syncDataFromSheet () throws GeneralSecurityException, IOException {
+//        log.info("Syncing data book from google sheet");
+//        sheetsServiceUtil.renderVocabFromGoogleSheetToDatabase();
+//    }
 
     public ResponseEntity<List<Book>> getAllBooks(String nameBook) {
         try {
@@ -45,7 +58,7 @@ public class BookServices {
 
     public ResponseEntity<Book> createBook(Book book) {
         try {
-            Book bookAdd = bookRepository.save(new Book( book.getBookName(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
+            Book bookAdd = bookRepository.save(new Book(book.getIdBook(), book.getNameBook(), book.getBookShelves(), book.getAuthor(), book.getIdBookStore(), book.getReleaseDate(), book.getSaleDate()));
             return new ResponseEntity<>(bookAdd, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,7 +69,7 @@ public class BookServices {
         Optional<Book> bookData = bookRepository.findById(id);
         if (bookData.isPresent()) {
             Book bookEdit = bookData.get();
-            bookEdit.setBookName(book.getBookName());
+            bookEdit.setNameBook(book.getNameBook());
             bookEdit.setBookShelves(book.getBookShelves());
             bookEdit.setAuthor(book.getAuthor());
             bookEdit.setIdBookStore(book.getIdBookStore());

@@ -1,7 +1,7 @@
 package com.example.qlsach.controller;
 
-import com.example.qlsach.Service.BookServices;
 import com.example.qlsach.model.Book;
+import com.example.qlsach.service.BookServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

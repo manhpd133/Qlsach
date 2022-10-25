@@ -1,12 +1,16 @@
 package com.example.qlsach.controller;
 
-import com.example.qlsach.Service.BookStoreServices;
+import com.example.qlsach.service.BookStoreServices;
 import com.example.qlsach.model.BookStore;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -16,6 +20,12 @@ public class BookStoreController {
 
     @Autowired
     private BookStoreServices bookStoreServices;
+
+    @GetMapping("/init-data")
+    private ResponseEntity<?> initDataBook() throws GeneralSecurityException, IOException {
+        bookStoreServices.syncDataFromSheet();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @GetMapping ()
     public ResponseEntity<List<BookStore>> getAllBookStores(@RequestParam (required = false, value = "bookStore_name") String bookStoreName) {
@@ -30,6 +40,11 @@ public class BookStoreController {
     @PostMapping()
     public ResponseEntity<BookStore> createBookStore(@RequestBody BookStore bookStore) {
        return bookStoreServices.createBookStore(bookStore);
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<BookStore> EditBookStore(@PathVariable("id") long id) throws ChangeSetPersister.NotFoundException, JsonProcessingException {
+        return bookStoreServices.handleEditBookStore(id);
     }
 
     @PutMapping("/{id}")
